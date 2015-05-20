@@ -1,0 +1,434 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Ivan.Z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="ivan.z">
+    
+
+    
+    <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ivan.Z">
+<meta property="og:url" content="http://ivanz.info/index.html">
+<meta property="og:site_name" content="Ivan.Z">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ivan.Z">
+<meta name="twitter:description">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Ivan.Z" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Ivan.Z" title="Ivan.Z"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Ivan.Z">Ivan.Z</a></h1>
+				<h2 class="blog-motto">Blog My Life</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:ivanz.info">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/" title="在Unity3D里用Shader实现遮挡X光效果，类似火炬之光" itemprop="url">在Unity3D里用Shader实现遮挡X光效果，类似火炬之光</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="ivan.z" target="_blank" itemprop="author">ivan.z</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-20T13:36:27.000Z" itemprop="datePublished"> 發表於 2015-05-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>实现效果：<img src="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/1.png" alt="1.png" title=""><br>原理很简单，就是用两个Pass来渲染物体，第一遍渲染被遮挡部分，开启ZWrite Off Ztest Greater，显示X光效果，第二遍正常渲染未遮挡部分，代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">Shader "XRay"</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainTex ("Base (RGB)", 2D) = "white" &#123;&#125;</span><br><span class="line">        _MatCap ("MatCap (RGB)", 2D) = "white" &#123;&#125;</span><br><span class="line">        _Color("_Color", Color) = (0,1,0,1)</span><br><span class="line">    &#125;</span><br><span class="line">    Subshader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags &#123; "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" &#125;</span><br><span class="line"> </span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            Tags &#123; "LightMode" = "Vertex" &#125;</span><br><span class="line"> </span><br><span class="line">            Blend One OneMinusSrcColor</span><br><span class="line">            Cull Off</span><br><span class="line">            Lighting Off</span><br><span class="line">            ZWrite Off</span><br><span class="line">            Ztest Greater</span><br><span class="line"> </span><br><span class="line">            CGPROGRAM</span><br><span class="line">                #pragma vertex vert</span><br><span class="line">                #pragma fragment frag</span><br><span class="line">                #pragma fragmentoption ARB_precision_hint_fastest</span><br><span class="line">                #include "UnityCG.cginc"</span><br><span class="line"> </span><br><span class="line">                struct v2f</span><br><span class="line">                &#123;</span><br><span class="line">                    float4 pos    : SV_POSITION;</span><br><span class="line">                    float2 cap    : TEXCOORD0;</span><br><span class="line">                &#125;;</span><br><span class="line"> </span><br><span class="line">                v2f vert (appdata_base v)</span><br><span class="line">                &#123;</span><br><span class="line">                    v2f o;</span><br><span class="line">                    o.pos = mul (UNITY_MATRIX_MVP, v.vertex);</span><br><span class="line"> </span><br><span class="line">                    half2 capCoord;</span><br><span class="line">                    capCoord.x = dot(UNITY_MATRIX_IT_MV[0].xyz,v.normal);</span><br><span class="line">                    capCoord.y = dot(UNITY_MATRIX_IT_MV[1].xyz,v.normal);</span><br><span class="line">                    o.cap = capCoord * 0.5 + 0.5;</span><br><span class="line"> </span><br><span class="line">                    return o;</span><br><span class="line">                &#125;</span><br><span class="line"> </span><br><span class="line">                uniform float4 _Color;</span><br><span class="line">                uniform sampler2D _MatCap;</span><br><span class="line"> </span><br><span class="line">                float4 frag (v2f i) : COLOR</span><br><span class="line">                &#123;</span><br><span class="line">                    float4 mc = tex2D(_MatCap, i.cap);</span><br><span class="line"> </span><br><span class="line">                    return _Color * mc * 2.0;</span><br><span class="line">                &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">        Pass &#123;</span><br><span class="line">            Tags &#123; "LightMode" = "Vertex" &#125;</span><br><span class="line">            ColorMaterial AmbientAndDiffuse</span><br><span class="line">            Lighting On</span><br><span class="line">            SetTexture [_MainTex] &#123;</span><br><span class="line">                combine texture</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack "Mobile/VertexLit"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Shader里用到了一张X光贴图，用于优化遮挡部分效果，请直接右键保存<br><img src="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/2.png" alt="2.png" title=""></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Unity3D/">Unity3D</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Shader/">Shader</a><a href="/tags/XRay/">XRay</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/20/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="ivan.z" target="_blank" itemprop="author">ivan.z</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-19T16:00:00.000Z" itemprop="datePublished"> 發表於 2015-05-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>原先的Sillyboy.org已经废弃，正在慢慢转移文章过来，此博客后期会不断更新更多原创文章。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Others/">Others</a>
+</div>
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/20/hello-world/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/20/hello-world/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Others/" title="Others">Others<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Unity3D/" title="Unity3D">Unity3D<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Shader/" title="Shader">Shader<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/XRay/" title="XRay">XRay<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Ivan.Z in china. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/losetear" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="ivan.z">ivan.z</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"ivanz"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-63181758-1', 'auto');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
