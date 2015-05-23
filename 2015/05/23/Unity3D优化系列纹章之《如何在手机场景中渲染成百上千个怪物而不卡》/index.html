@@ -11,29 +11,29 @@
     
 
     
-    <meta name="description" content="如何在Unity 3D中优化使用大量SkinedMeshRenderer1
+    <meta name="description" content="如何在Unity 3D中优化使用大量SkinedMeshRenderer
 
 Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质以及贴图最好都要合并。因为一个独立的模型和材质，渲染会占用一次Draw Call，而Draw Call的多少，是现代显卡的瓶颈所在，在手机上尤甚！
-比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个D">
+比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个Dr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》">
 <meta property="og:url" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/index.html">
 <meta property="og:site_name" content="Ivan.Z">
-<meta property="og:description" content="如何在Unity 3D中优化使用大量SkinedMeshRenderer1
+<meta property="og:description" content="如何在Unity 3D中优化使用大量SkinedMeshRenderer
 
 Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质以及贴图最好都要合并。因为一个独立的模型和材质，渲染会占用一次Draw Call，而Draw Call的多少，是现代显卡的瓶颈所在，在手机上尤甚！
-比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个D">
+比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个Dr">
 <meta property="og:image" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/1-300x193.png">
 <meta property="og:image" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/2-300x245.png">
 <meta property="og:image" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/3-300x165.png">
 <meta property="og:image" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/4-300x172.png">
-<meta property="og:updated_time" content="2015-05-23T03:35:27.844Z">
+<meta property="og:updated_time" content="2015-05-23T05:16:55.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》">
-<meta name="twitter:description" content="如何在Unity 3D中优化使用大量SkinedMeshRenderer1
+<meta name="twitter:description" content="如何在Unity 3D中优化使用大量SkinedMeshRenderer
 
 Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质以及贴图最好都要合并。因为一个独立的模型和材质，渲染会占用一次Draw Call，而Draw Call的多少，是现代显卡的瓶颈所在，在手机上尤甚！
-比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个D">
+比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个Dr">
 
     
     <link rel="alternative" href="/atom.xml" title="Ivan.Z" type="application/atom+xml">
@@ -109,11 +109,11 @@ Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">如何在Unity 3D中优化使用大量SkinedMeshRenderer1</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">如何在Unity 3D中优化使用大量SkinedMeshRenderer</span></a></li></ol>
 		
 		</div>
 		
-		<h1>如何在Unity 3D中优化使用大量SkinedMeshRenderer1</h1>
+		<h1>如何在Unity 3D中优化使用大量SkinedMeshRenderer</h1>
 
 <p>Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质以及贴图最好都要合并。因为一个独立的模型和材质，渲染会占用一次Draw Call，而Draw Call的多少，是现代显卡的瓶颈所在，在手机上尤甚！</p>
 <p>比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个Draw Call。如果你本身的场景就已经占用了大量的Draw Call，还要刷十几个怪物的话，我相信你的游戏在低端手机上是无法跑的流畅的。关于场景制作的优化方式，我会在之后的文章里和大家分享，这里只讨论带骨骼动画的模型如何优化显示。</p>
@@ -184,7 +184,7 @@ Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">如何在Unity 3D中优化使用大量SkinedMeshRenderer1</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">如何在Unity 3D中优化使用大量SkinedMeshRenderer</span></a></li></ol>
  
   </div>
 
