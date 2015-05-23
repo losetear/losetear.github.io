@@ -4,25 +4,36 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>在Unity3D里用Shader实现遮挡X光效果，类似火炬之光 | Ivan.Z</title>
+    <title>Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》 | Ivan.Z</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="ivan.z">
     
 
     
-    <meta name="description" content="实现效果：原理很简单，就是用两个Pass来渲染物体，第一遍渲染被遮挡部分，开启ZWrite Off Ztest Greater，显示X光效果，第二遍正常渲染未遮挡部分，代码如下：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960">
+    <meta name="description" content="如何在Unity 3D中优化使用大量SkinedMeshRenderer1
+
+Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质以及贴图最好都要合并。因为一个独立的模型和材质，渲染会占用一次Draw Call，而Draw Call的多少，是现代显卡的瓶颈所在，在手机上尤甚！
+比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个D">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在Unity3D里用Shader实现遮挡X光效果，类似火炬之光">
-<meta property="og:url" content="http://ivanz.info/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/index.html">
+<meta property="og:title" content="Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》">
+<meta property="og:url" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/index.html">
 <meta property="og:site_name" content="Ivan.Z">
-<meta property="og:description" content="实现效果：原理很简单，就是用两个Pass来渲染物体，第一遍渲染被遮挡部分，开启ZWrite Off Ztest Greater，显示X光效果，第二遍正常渲染未遮挡部分，代码如下：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960">
-<meta property="og:image" content="http://ivanz.info/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/1.png">
-<meta property="og:image" content="http://ivanz.info/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/2.png">
-<meta property="og:updated_time" content="2015-05-20T14:03:29.793Z">
+<meta property="og:description" content="如何在Unity 3D中优化使用大量SkinedMeshRenderer1
+
+Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质以及贴图最好都要合并。因为一个独立的模型和材质，渲染会占用一次Draw Call，而Draw Call的多少，是现代显卡的瓶颈所在，在手机上尤甚！
+比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个D">
+<meta property="og:image" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/1-300x193.png">
+<meta property="og:image" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/2-300x245.png">
+<meta property="og:image" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/3-300x165.png">
+<meta property="og:image" content="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/4-300x172.png">
+<meta property="og:updated_time" content="2015-05-23T01:59:19.215Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在Unity3D里用Shader实现遮挡X光效果，类似火炬之光">
-<meta name="twitter:description" content="实现效果：原理很简单，就是用两个Pass来渲染物体，第一遍渲染被遮挡部分，开启ZWrite Off Ztest Greater，显示X光效果，第二遍正常渲染未遮挡部分，代码如下：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960">
+<meta name="twitter:title" content="Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》">
+<meta name="twitter:description" content="如何在Unity 3D中优化使用大量SkinedMeshRenderer1
+
+Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质以及贴图最好都要合并。因为一个独立的模型和材质，渲染会占用一次Draw Call，而Draw Call的多少，是现代显卡的瓶颈所在，在手机上尤甚！
+比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个D">
 
     
     <link rel="alternative" href="/atom.xml" title="Ivan.Z" type="application/atom+xml">
@@ -82,14 +93,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/" title="在Unity3D里用Shader实现遮挡X光效果，类似火炬之光" itemprop="url">在Unity3D里用Shader实现遮挡X光效果，类似火炬之光</a>
+      <a href="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/" title="Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》" itemprop="url">Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="ivan.z" target="_blank" itemprop="author">ivan.z</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-20T13:36:27.000Z" itemprop="datePublished"> 發表於 2015-05-20</time>
+    <time datetime="2015-05-22T16:00:00.000Z" itemprop="datePublished"> 發表於 2015-05-23</time>
     
   </p>
 </header>
@@ -98,12 +109,20 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">如何在Unity 3D中优化使用大量SkinedMeshRenderer1</span></a></li></ol>
 		
 		</div>
 		
-		<p>实现效果：<img src="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/1.png" alt="1.png" title=""><br>原理很简单，就是用两个Pass来渲染物体，第一遍渲染被遮挡部分，开启ZWrite Off Ztest Greater，显示X光效果，第二遍正常渲染未遮挡部分，代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">Shader "XRay"</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainTex ("Base (RGB)", 2D) = "white" &#123;&#125;</span><br><span class="line">        _MatCap ("MatCap (RGB)", 2D) = "white" &#123;&#125;</span><br><span class="line">        _Color("_Color", Color) = (0,1,0,1)</span><br><span class="line">    &#125;</span><br><span class="line">    Subshader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags &#123; "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" &#125;</span><br><span class="line"> </span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            Tags &#123; "LightMode" = "Vertex" &#125;</span><br><span class="line"> </span><br><span class="line">            Blend One OneMinusSrcColor</span><br><span class="line">            Cull Off</span><br><span class="line">            Lighting Off</span><br><span class="line">            ZWrite Off</span><br><span class="line">            Ztest Greater</span><br><span class="line"> </span><br><span class="line">            CGPROGRAM</span><br><span class="line">                #pragma vertex vert</span><br><span class="line">                #pragma fragment frag</span><br><span class="line">                #pragma fragmentoption ARB_precision_hint_fastest</span><br><span class="line">                #include "UnityCG.cginc"</span><br><span class="line"> </span><br><span class="line">                struct v2f</span><br><span class="line">                &#123;</span><br><span class="line">                    float4 pos    : SV_POSITION;</span><br><span class="line">                    float2 cap    : TEXCOORD0;</span><br><span class="line">                &#125;;</span><br><span class="line"> </span><br><span class="line">                v2f vert (appdata_base v)</span><br><span class="line">                &#123;</span><br><span class="line">                    v2f o;</span><br><span class="line">                    o.pos = mul (UNITY_MATRIX_MVP, v.vertex);</span><br><span class="line"> </span><br><span class="line">                    half2 capCoord;</span><br><span class="line">                    capCoord.x = dot(UNITY_MATRIX_IT_MV[0].xyz,v.normal);</span><br><span class="line">                    capCoord.y = dot(UNITY_MATRIX_IT_MV[1].xyz,v.normal);</span><br><span class="line">                    o.cap = capCoord * 0.5 + 0.5;</span><br><span class="line"> </span><br><span class="line">                    return o;</span><br><span class="line">                &#125;</span><br><span class="line"> </span><br><span class="line">                uniform float4 _Color;</span><br><span class="line">                uniform sampler2D _MatCap;</span><br><span class="line"> </span><br><span class="line">                float4 frag (v2f i) : COLOR</span><br><span class="line">                &#123;</span><br><span class="line">                    float4 mc = tex2D(_MatCap, i.cap);</span><br><span class="line"> </span><br><span class="line">                    return _Color * mc * 2.0;</span><br><span class="line">                &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">        Pass &#123;</span><br><span class="line">            Tags &#123; "LightMode" = "Vertex" &#125;</span><br><span class="line">            ColorMaterial AmbientAndDiffuse</span><br><span class="line">            Lighting On</span><br><span class="line">            SetTexture [_MainTex] &#123;</span><br><span class="line">                combine texture</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack "Mobile/VertexLit"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Shader里用到了一张X光贴图，用于优化遮挡部分效果，请直接右键保存<br><img src="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/2.png" alt="2.png" title=""></p>
+		<h1>如何在Unity 3D中优化使用大量SkinedMeshRenderer1</h1>
+
+<p>Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质以及贴图最好都要合并。因为一个独立的模型和材质，渲染会占用一次Draw Call，而Draw Call的多少，是现代显卡的瓶颈所在，在手机上尤甚！</p>
+<p>比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个Draw Call。如果你本身的场景就已经占用了大量的Draw Call，还要刷十几个怪物的话，我相信你的游戏在低端手机上是无法跑的流畅的。关于场景制作的优化方式，我会在之后的文章里和大家分享，这里只讨论带骨骼动画的模型如何优化显示。</p>
+<p>Unity自身已经替我们做了大量的优化工作，如果你的模型是不带骨骼并且顶点数在300一下，那么重复出现的这个模型是会被自动优化从而只占用一个DrawCall，如下图：<br><img src="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/1-300x193.png" alt="1-300x193.png" title=""></p>
+<p>但是如果你需要让这个模型带骨骼并动起来，不好意思，Unity不支持将之优化到一个DrawCall。在下图我们可以看到同时渲染了5个骷髅怪，每个占用3个DrawCall，一共消耗了15个DrawCall：<br><img src="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/2-300x245.png" alt="2-300x245.png" title=""></p>
+<p>当然，你可以将这个骷髅怪的模型装备武器合并到一起，纹理也合并掉，公用一个材质，这样五个怪物就只占用5个DrawCall。如果你不需要同时刷新成百上千个怪物的话，这样就够用了。不过有时候我们会希望同时刷更多的怪物出来，可以让玩家感受场面的宏伟，并且打的更爽快。这个时候怎么办呢？</p>
+<p>这篇文章介绍的是使用插件优化的方式，插件名称叫做MeshBaker2，下载地址就不提供了，各位可以自行搜索。这是一个非常强大的插件，支持MeshRender和SkinedMeshRender的合并，还支持运行时动态合并，在这里我们使用的就是动态合并的方式，下图可以看到在合并前渲染25个矮人共消耗136个DrawCall：<br><img src="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/3-300x165.png" alt="3-300x165.png" title=""></p>
+<p>然后在开启MeshBaker的动态合并之后，我们可以很直接发现DrawCall变成了3个，其中地面和UI各占用一个DrawCall，而我们的25个怪物则已经合并到了一个DrawCall渲染。<br><img src="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/4-300x172.png" alt="4-300x172.png" title=""></p>
+<p>其中核心代码如下：<br>//newCombines指这次调用新增加的Render对象，oldCombines指已经不用需要删除的Render对象<br><figure class="highlight c"><figcaption><span>#</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mb.AddDeleteGameObjects (newCombines.ToArray (), oldCombines.ToArray ());</span><br><span class="line">mb.Apply ();</span><br><span class="line">mb.EnableDisableSourceObjectRenderers (<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure><br>源代码就不放出了，因为里面的插件涉及到版权问题。只要查看Mesh Baker的官方文档就可以很容易使用了。<br>下面是demo演示地址：<a href="https://db.tt/8C924w6A" target="_blank" rel="external">https://db.tt/8C924w6A</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -115,18 +134,13 @@
 </div>
 
 
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Shader/">Shader</a><a href="/tags/XRay/">XRay</a>
-  </div>
-
 </div>
 
 
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://ivanz.info/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/" data-title="在Unity3D里用Shader实现遮挡X光效果，类似火炬之光 | Ivan.Z" data-tsina="losetear" class="share clearfix">
+	  <div data-url="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/" data-title="Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》 | Ivan.Z" data-tsina="losetear" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -139,19 +153,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/" title="Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/05/20/hello-world/"  title="Hello World">
+<a href="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/"  title="在Unity3D里用Shader实现遮挡X光效果，类似火炬之光">
  <strong>下一篇：</strong><br/> 
- <span>Hello World
+ <span>在Unity3D里用Shader实现遮挡X光效果，类似火炬之光
 </span>
 </a>
 </div>
@@ -160,7 +166,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/" data-title="在Unity3D里用Shader实现遮挡X光效果，类似火炬之光" data-url="http://ivanz.info/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/"></div>
+	<div class="ds-thread" data-thread-key="2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/" data-title="Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》" data-url="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/"></div>
 </section>
 
 
@@ -170,7 +176,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">如何在Unity 3D中优化使用大量SkinedMeshRenderer1</span></a></li></ol>
  
   </div>
 
