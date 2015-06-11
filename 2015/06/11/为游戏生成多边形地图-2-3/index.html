@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="Shader," />
+  <meta name="keywords" content="Unity3D,地图,随机," />
 
 
 
@@ -43,7 +43,7 @@
   </script>
 
 
-  <title> Unity Shaders and Effects Cookbook《目录》 // Ivan.Z </title>
+  <title> （原创）为Unity3D游戏生成2D和3D多边形随机地图(2/3) // Ivan.Z </title>
 </head>
 
 <body>
@@ -139,7 +139,7 @@
           
           
             
-              Unity Shaders and Effects Cookbook《目录》
+              （原创）为Unity3D游戏生成2D和3D多边形随机地图(2/3)
             
           
         </h1>
@@ -147,7 +147,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-05-22
+          发表于 2015-06-11
         </span>
 
         
@@ -167,8 +167,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/05/23/Unity Shaders and Effects Cookbook 翻译 《目录》/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/23/Unity Shaders and Effects Cookbook 翻译 《目录》/"></span>
+            <a href="/2015/06/11/为游戏生成多边形地图-2-3/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/11/为游戏生成多边形地图-2-3/"></span>
             </a>
           </span>
           
@@ -182,20 +182,171 @@
       
 
       
-        <h1>Preface  1<br>引言 1</h1>
-
-<p></p><h1>Chapter 1: Diffuse Shading  7<br>第一章：漫反射着色器 7</h1><br>Introduction  7<br>介绍 7<br>Creating a basic Surface Shader  8<br>创建一个基础的表面着色器 8<br>Adding properties to a Surface Shader  12<br>添加属性到表面着色器<br>Using properties in a Surface Shader  14<br>在表面着色器中使用属性<br>Creating a custom diffuse lighting model  17<br>创建一个自定义的漫反射光照模型<br>Creating a Half Lambert lighting model  20<br>创建一个Half Lambert[a] 光照模型<br>Creating a ramp texture to control diffuse shading  22<br>使用ramp texture来控制漫反射着色器<br>Creating a faked BRDF using a 2D ramp texture  24<br>通过 2D ramp texture来模拟BRDF[b] <p></p>
-<p></p><h1>Chapter 2: Using Textures for Effects  29<br>第二章：使用纹理 29</h1><br>Introduction  29<br>介绍 29<br>Scrolling textures by modifying UV values  30<br>修改UV来滚动纹理 30<br>Animating sprite sheets  33<br>让sprite sheets 运动起来 33<br>Packing and blending textures  39<br>打包和混合纹理 39<br>Normal mapping  44<br>法线贴图 44<br>Creating procedural textures in the Unity editor  48<br>在Unity编辑器里创建procedural textures 48<br>Photoshop levels effect  54<br>实现Photoshop 的效果 54<p></p>
-<p></p><h1>Chapter 3: Making Your Game Shine with Specular  59<br>第三章：让你的游戏像镜子那样发光  59</h1><br>Introduction  59<br>介绍 59<br>Utilizing Unity3D’s built-in Specular type  60<br>使用Unity3D自带的镜面反射Shader 60<br>Creating a Phong Specular type  62<br>创建Phong镜面反射类型 62<br>Creating a BlinnPhong Specular type  66<br>创建BlinnPhong镜面反射类型 66<br>Masking Specular with textures  69<br>用纹理来遮罩镜面反射 69<br>Metallic versus soft Specular  74<br>金属类型的镜面反射 74<br>Creating an Anisotropic Specular type  79<br>创建一个各向异性镜面反射类型 79<p></p>
-<p></p><h1>Chapter 4:Reflecting Your World 87<br>第四章：反射你的世界 87</h1><br>Creating cubemaps in Unity3D 88<br>在Unity3D里创建一个立方贴图 88<br>Simple Cubemap reflection in Unity3D 93<br>简单的立方贴图反射 93<br>Masking reflections in Unity3D 96<br>Unity3D里的遮罩反射96<br>Normal maps and reflections in Unity3D 100<br>Unity3D 里的法线贴图和反射 100<br>Fresnel reflections in Unity3D 104<br>Unity3D 里的菲涅耳反射[c]<br>Creating a simple dynamic Cubemap system 108<br>创建一个简单的动态立方贴图 108<p></p>
-<p></p><h1>Chapter 5:Lighting Models 113<br>第五章：光照模型 113</h1><br>introduction 113<br>介绍 113<br>The Lit sphere lighting model 114<br>被照亮的球体光照模型 114<br>The diffuse convolution lighting model 119<br>漫发射叠加光照模型 119<br>Creating a vehicle paint lighting model 125<br>创建交通工具的绘制光照模型 125<br>Skin shader 130<br>皮肤着色器 130<br>Cloth shading 137<br>布料着色器 137<p></p>
-<p></p><h1>Chapter 6: Transparency 143<br>第六章：透明 143</h1><br>introduction 143<br>介绍 143<br>Creating transparency with alpha 143<br>用alpha控制透明度 143<br>Transparent cutoff shader 146<br>透明裁剪着色器 146<br>Depth sorting with render queues 148<br>用渲染对列控制深度排序 148<br>GUI and transparency 151<br>用在Gui上的透明 151<p></p>
-<p></p><h1>Chapter 7:Vertex Magic 159<br>第七章：顶点魔法 159</h1><br>introduction 159<br>介绍 159<br>Accessing a vertex color in a Surface Shader 160<br>在表面着色器里访问顶点颜色 160<br>Animating vertices in a Surface Shader 164<br>在表面着色器里运动顶点 164<br>Using vertex color for terrains 168<br>在地形上使用顶点色 168<p></p>
-<p></p><h1>Chapter 8: Mobile Shader Adjustment 173<br>第八章：手机着色器调整 173</h1><br>introduction 173<br>介绍 173<br>What is a cheap Shader? 174<br>什么是快速的着色器 174<br>Profiling your Shaders 179<br>分析你的着色器 179<br>Modiflying your shaders for mobile 185<br>为了手机修改你的着色器 185<p></p>
-<p></p><h1>Chapter 9: Making Your Shader World Modular with Cglncludes 191<br>第九章：用Cglncludes 让你的着色器世界开发变得更加模块化 191</h1><br>introduction 191<br>介绍 191<br>Cginclude files that are built into Unity 192<br>Unity自带的Cginclude文件 192<br>Creating a cginclude file to store lighting models 195<br>创建一个cginclude文件来保存光照模型 195<br>Building shaders with #define directives 199<br>用#define 指令来建立着色器 199<p></p>
-<p></p><h1>Chapter 10:Screen Effects with Unity Render Textures 203<br>第十章：用Unity渲染纹理实现屏幕效果 203</h1><br>Introduction 203<br>介绍 203<br>Setting up the screen effects script system 204<br>设置屏幕效果的脚本系统 204<br>Brightness, saturation, and contrast with screen effects 213<br>用屏幕效果调整亮度、饱和度以及对比度 213<br>Basic Photoshop-like blend modes with screen effects 218<br>像Photoshop那样混合模型和屏幕效果 218<br>The Overlay blend mode with screen effects 224<br>在模型上覆盖屏幕效果 224<p></p>
-<p></p><h1>Chapter 11: Gameplay and Screen Effects 229<br>第十一章：游戏性和屏幕效果 229</h1><br>Introduction 229<br>介绍 229<br>Creating an old movie screen effect 230<br>创建一个旧电影屏幕效果 230<br>Creating a night vision screen effect 239<br>创建一个夜视仪效果 239<p></p>
-<p></p><h1>Index 249<br>索引249</h1><br>[a]Ivan Zhang:<br>这个算法会加强暗部的亮度<br>[b]Ivan Zhang:<br>BRDF 双向反射分布函数 参见wiki <a href="http://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function" target="_blank" rel="external">http://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function</a><br>[c]Ivan Zhang:<br>参见 Wiki <a href="http://zh.wikipedia.org/wiki/%E8%8F%B2%E6%B6%85%E8%80%B3%E6%96%B9%E7%A8%8B" target="_blank" rel="external">http://zh.wikipedia.org/wiki/%E8%8F%B2%E6%B6%85%E8%80%B3%E6%96%B9%E7%A8%8B</a><br>[d]Ivan Zhang:<br>表面着色器<p></p>
+        <blockquote><p>原版Demo，稍后会放出改进版的Unity版本</p>
+<footer><strong>Ivan.Z</strong><cite><a href="http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/demo.html" target="_blank" rel="external">官方Demo</a></cite></footer></blockquote>
+<h2 id="Rivers_河流">Rivers 河流</h2><p>Rivers and lakes are the two fresh water features I wanted. The most realistic approach would be to define moisture with wind, clouds, humidity, and rainfall, and then define the rivers and lakes based on where it rains. Instead, I’m starting with the goal, which is good rivers, and working backwards from there.<br>我想要地图里包含河流和湖泊。最通用的办法是先定义一个包含风，云，湿度和降雨的湿度图，然后在这个基础上定义河流和湖泊。相反，我先设定好地图上的河流，然后从这里倒退计算。</p>
+<p>The island shape determines which areas are water and which are land. Lakes are water polygons that aren’t oceans.<br>岛屿的形状决定了哪些区域是水哪些是陆地。标记为水的多边形除了海洋就是湖泊。</p>
+<p>Rivers use the downhill directions shown earlier. I choose random corner locations in the mountains, and then follow the Corner.downslope path down to the ocean. The rivers flow from corner to corner:<br>如前所示，河流使用了下坡的方向。我选择山峰的一个随机角落，然后按照Corner.downslope方向一路走向海洋。河流从一个角落流向另一个角落：<br><img src="/2015/06/11/为游戏生成多边形地图-2-3/river.png" alt="river.png" title=""></p>
+<p>I tried both polygon centers and corners, but found that the corner graph made for much nicer looking rivers. Also, by keeping lakes flat, elevation tends to be lower near lakes, so rivers naturally flow into and out of lakes. Multiple rivers can share the lower portion of their path. Every time a river flows through an edge, I increase the water volume stored in Edge.river by 1. At rendering time, the river width is the square root of the volume. This approach is simple and works well.<br>我分别尝试过使用多边形的中心和角落来计算河流，最后发现还是角落的图集生成的河流更好看。此外，通过保持湖泊的平坦，靠近湖泊的海拔自然趋向更低，所以河流很自然的流入和流出湖泊。多个河流可以共享它们的部分下游路径。每当一条河流经过一条边缘，我就会将存储在Edge.river 变量里的水量加1。这样在渲染的时候，河流的宽度就是水量的平方了。这种方既简单效果又好。</p>
+<h2 id="Moisture_湿度图">Moisture 湿度图</h2><p>Since I’m working backwards, I don’t need moisture to form rivers. However, moisture would be useful for defining biomes (deserts, swamps, forests, etc.). Since rivers and lakes should form in areas with high moisture, I defined moisture to decrease as distance from fresh water increases. Corner.moisture is set to a^k for some a &lt; 1 (e.g. 0.95), and k being the distance. There are unfortunately some tuning parameters in Map.assignCornerMoisture that I tweaked until the maps looked reasonable:<br>由于我是逆向工作的，所以不需要一个湿度图来生成河流。然而，湿度图对于定义生物群落 还是很有用的（比如沙漠，沼泽，森林等）。由于河流和湖泊要从高湿度的区域发起，我定义湿度的规则为随着远离淡水则降低水分 。Corner.moisture被设定为a^k（a的k次方），注意a永远&lt;1 （例如0.95），并且k作为远离淡水的距离。不幸的是我需要手动调整Map.assignCornerMoisture 参数，直到地图看起来合理为止。</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/moisture.png" alt="moisture.png" title="">
+<p>As with elevation, I redistribute moisture to match a desired distribution. In this case, I want roughly equal numbers of dry and wet regions. The desired cumulative distribution is y(x) = x, so the redistribution code is very simple. I sort by moisture and then assign the moisture of each corner to that corner’s position in the sorted list. See Map.redistributeMoisture for the code.<br>和海拔一样，我重新分配了湿度直到符合期望的分布。在这种情况下，我希望干旱和湿润地区大致相等。所需的累积分布函数是y(x) = x ，所以分配代码是很简单的。我先按照湿度排序角落，然后按照每个角落在排序里的顺序分配湿度。查看代码里的Map.redistributeMoisture一值。</p>
+<p>In this map generator, moisture is only used for biomes. However, games may find other uses for the moisture data. For example, Realm of the Mad God uses moisture and elevation to distribute vegetation and monsters.<br>在这个地图生成器里，湿度只用来处理生物群落。然而，游戏可能会将之用在其他的地方。例如，  Realm of the Mad God采用水分和海拔来分布植被和怪物。</p>
+<h2 id="Biomes_生物群落">Biomes 生物群落</h2><p>Together, elevation and moisture provide a good amount of variety to define biome types. I use elevation as a proxy for temperature. If this were a continent generator, latitude might be a contributor to temperature. Also, wind, evaporation, and rain shadows might be useful for transporting moisture as humidity. However, for this generator I kept it simple. Biomes first depend on whether it’s water or land:<br>总之，海拔和湿度提供了足够的多样性来定义生物类型。我使用海拔来代理温度。如果这是一个大陆生成器，纬度可能是影响温度的主要贡献者。此外，风，水分蒸发和雨影区也会导致湿度的转移。不过，我保持了这个算法的简洁。生物群落首先依赖于地形是水面还是陆地。</p>
+<ul>
+<li>OCEAN is any water polygon connected to the map border</li>
+<li>LAKE is any water polygon not connected to the map border, or ICE lake if the lake is at high elevation (low temperature), or MARSH if it’s at low elevation </li>
+<li>BEACH is any land polygon next to an ocean</li>
+<li>OCEAN是任何接触到地图边缘的水多边形。</li>
+<li>湖泊是任何没有连接到地图边界的水多边形，或者冰湖则是高海拔且低温度的湖泊，沼泽 则是低海拔的湖泊。</li>
+<li>海滩则是毗邻海洋的土地多边形</li>
+</ul>
+<p>For all land polygons, I started with the Whittaker diagram and adapted it to my needs:<br>对于所有的土地多边形，我开始用Whittaker diagram算法来处理，并将之修改为适应我的需求：</p>
+<p>Elevation Zone                    Moisture Zone</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:right">6(wet)</th>
+<th style="text-align:right">5</th>
+<th style="text-align:right">4</th>
+<th style="text-align:right">3</th>
+<th style="text-align:right">2</th>
+<th style="text-align:right">1(dry)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4(high)</td>
+<td style="text-align:right">SNOW</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right">TUNDRA</td>
+<td style="text-align:right">BARE</td>
+<td style="text-align:right">SCORCHED</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:right">TAIGA</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">SHRUBLAND</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">TEMPERATE DESERT</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:right">TEMPERATE RAIN FOREST</td>
+<td style="text-align:right">TEMPERATE DECIDUOUS FOREST</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">GRASSLAND</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">TEMPERATE DESERT</td>
+</tr>
+<tr>
+<td>1(low)</td>
+<td style="text-align:right">TROPICAL RAIN FOREST</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">TROPICAL SEASONAL FOREST</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">GRASSLAND</td>
+<td style="text-align:right">SUBTROPICAL DESERT</td>
+</tr>
+</tbody>
+</table>
+<p>海拔区                    湿度区</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:right">6(湿)</th>
+<th style="text-align:right">5</th>
+<th style="text-align:right">4</th>
+<th style="text-align:right">3</th>
+<th style="text-align:right">2</th>
+<th style="text-align:right">1（干）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4(高)</td>
+<td style="text-align:right">雪地</td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right">冻土</td>
+<td style="text-align:right">荒原</td>
+<td style="text-align:right">焦土</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:right">针叶林</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">灌木丛</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">温带荒漠</td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:right">温带雨林</td>
+<td style="text-align:right">温带落叶林</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">草原</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">温带荒漠</td>
+</tr>
+<tr>
+<td>1(低)</td>
+<td style="text-align:right">热带雨林</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">热带季雨林</td>
+<td style="text-align:right"></td>
+<td style="text-align:right">草原</td>
+<td style="text-align:right">亚热带沙漠</td>
+</tr>
+</tbody>
+</table>
+<p>Here’s the result:<br>这里是结果：</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/biomes.png" alt="biomes.png" title="">
+<p>These biomes look good in the map generation demo, but each game will have its own needs. Realm of the Mad God for example ignores these biomes and uses its own (based on elevation and moisture).<br>这些生物群落在这个地图生成器demo里看起来不错，但每个游戏都会有自己独特的需求。以 Realm of the Mad God为例，它忽略了这些生物群落，并使用它自己的算法（基于海拔和湿度）。</p>
+<h2 id="Noisy_Edges_噪声化边缘">Noisy Edges 噪声化边缘</h2><p>For some games, the polygonal maps are sufficient. However, in other games I want to hide the polygon structure. The main way I do that is to replace the polygon borders with a noisy line. Why would I want a polygon structure if I’m just going to hide it? I think game mechanics and pathfinding benefit from the underlying structure.<br>对于一些游戏，多边形地图就足够了。但是，在其他游​​戏里我想要隐藏多边形结构。我所用的方法是用扰乱的线条来替换多边形边界。如果我想要隐藏它为什么我还想要多边形结构。那是因为我认为游戏机制和寻路将会受益于这个底层结构。</p>
+<p>Recall from earlier that there are two graphs: one for Voronoi corners (1, 2 in the diagram below) and edges (blue lines), and one for polycon centers (A, B) and Delaunay edges (red lines) between them:<br>回想一下开始的时候，我们有两个图形：一个用于Voronoi 拐角（ 下图中的1 ， 2）和边缘（蓝线），还有一个用于多边形中心（ A ， B ），和他们之间的Delaunay 边缘（红色线）：</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/edge-duality.png" alt="edge-duality.png" title="">
+<p>I wanted to make both types of line noisy without making them cross lines from other polygons. I also wanted to make them as noisy as feasible. I realized that points A, 1, B, and 2 form a quadrilateral, and I could constrain the wanderings of the line segment to that quadrilateral:<br>我想扰乱这两种类型的边缘，但又不想让他们再次相交。并且需要确保他们是可以被扰乱的。我意识到点A ， 1 ， B ，和2形成了一个四边形，我可以将扰乱后的线条片段约束在这个四边形内：</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/edge-noisiness.png" alt="edge-noisiness.png" title="">
+<p>I further divided the quadrilateral into four quadrilaterals. Two were usable for the red (Delaunay) edge and two for the blue (Voronoi) edge. As long as the lines stayed within their allocated space and met in the center, they’d never cross each other. That takes care of constraining them. Note that the quadrilateral may not be convex; to divide it properly, I divide it at the midpoint of the Voronoi edge instead of at the intersection of the Voronoi and Delaunay edges.<br>我进一步将四边形分成四个四边形。两个用于红色（Delaunay）的边缘，还有两个用于蓝色（Voronoi）边。只要这些线段待在分配给他们的空间里，并且只在中心相交，那他们就永远不会互相相交。这需要谨慎制约他们。需要注意的是四边形未必是凸多边形;为了正确地将其划分，我从Voronoi 边的中点开始拆分而不是在Voronoi 和Delaunay 边的交叉点。</p>
+<p>The entire map can be divided up into these quadrilateral regions, with no space left over:<br>整个地图可以全部被划分成四边形区域，无一遗漏：</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/quad-markings.png" alt="quad-markings.png" title="">
+<p>That ensures that the noisy lines aren’t constrained any more than necessary. (I wonder if these quadrilaterals would be useful for game mechanics.)<br>这保证了扰乱线段除了必须的限制不会有更多要求了。（我不知道这些四边形对于游戏机制是否有用。）</p>
+<p>I can use any noisy line algorithm that fits within these constraints. I decided to subdivide the quadrilaterals recursively and stitch line segments together within the small quadrilaterals into a complete edge. The algorithm is in NoisyEdges.as, in buildNoisyLineSegments. The result is that the polygon edges are no longer straight:<br>我可以使用任何噪声算法，只要保证它们在约束内即可。我决定递归细分四边形和并将小四边形内的线段连成一个完整的边缘。该算法代码包含在NoisyEdges.as 的buildNoisyLineSegments 函数里。最终的结果是多边形的边缘不再笔直。</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/biomes-noisy.png" alt="biomes-noisy.png" title="">
+<p>There are three places to tune the noisiness:<br>有三个地方需要调整设置：</p>
+<ol>
+<li>The recursive function ends when the segments are shorter than some length. I have examples at segment size 7, segment size 4, and segment size 1. In the map demo I use segment size 1 for rivers and coastlines, 3 where biomes meet, and 10 elsewhere.</li>
+<li>当片段小于预定的值时，递归函数将会结束。这里有一些例子，分别是片段大小为7 ， 片段大小为4 ，和片段大小为1 。在地图的demo里，我将河流和海岸线的片段值设为1，生物群落的片段值设为3，剩下的都设为10。</li>
+<li>There’s a tradeoff between how much of the space goes to the red quadrilaterals (Delaunay edges) and blue quadrilaterals (Voronoi edges). I set NoisyEdges.NOISY_LINE_TRADEOFF to 0.5.</li>
+<li>还需要权衡有多少空间属于红色四边形（Delaunay边）和蓝色四边形（Voronoi边）。我将 NoisyEdges.NOISY_LINE_TRADEOFF设置为0.5。</li>
+<li>There’s a range of random numbers in NoisyEdges.subdivide. In the current demo it’s from 0.2-0.8, but it can be up to 0.0–1.0. Also, the random numbers don’t have to be linearly chosen. More visual noise results if you avoid the space around 0.5.</li>
+<li>在NoisyEdges.subdivide 函数里有一个随机数范围。在当前的demo里是从0.2-0.8，但它可以设置为0.0-1.0。另外，随机数不必按照线性选择。如果您避免在空间被平均划分，就会获得更加噪声化的视觉结果。</li>
+</ol>
+<p>Noisy edges turn out to have a large impact on the map appearance, especially for rivers and coastlines.<br>噪声化后的边缘对地图的外观有很大的影响，特别是对河流和海岸线。</p>
+<h2 id="More_noise_更多的噪声">More noise 更多的噪声</h2><p>I’m generally a fan of noise in game art, and wanted to add a little bit of noise to these maps as well. In a real game map the noise might reflect vegetation or small variations in terrain. In the demo (mapgen2.as) I just filled the screen with a random noise texture by adding a noise bitmap on top. I also smoothed the borders between adjacent polygons by blending the colors in stages:<br>通常我都是推崇在游戏美术里添加噪声 ，但希望只添加一点点噪声到这些地图为好。在一个真正的游戏地图中,噪声可以用于反映植被或地形的微小变化。在演示（ mapgen2.as ）里，我只是用一个随机噪声贴图来填充屏幕。我还通过混合相邻多边形边缘的颜色来平滑边界。</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/voronoi-map-goal.png" alt="voronoi-map-goal.png" title="">
+<p>Here’s a rendering with 16,000 polygons, noisy edges, a noise texture overlay, and simple lighting:<br>这个渲染示例拥有16000个多边形，并噪声化边缘，噪声纹理覆盖，以及简单的灯光：</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/voronoi-map-goal-16000-shaded.png" alt="voronoi-map-goal-16000-shaded.png" title="">
+<h2 id="Smooth_biome_transitions_平滑生物群落的过度">Smooth biome transitions 平滑生物群落的过度</h2><p>A different way of blending the biomes at polygon boundaries is to build gradients using the elevation and moisture at each corner, and then assigning biomes per pixel:<br>还有一种混合多边形边界的生物群落的方式，就是使用海拔和湿度在各个角落创建一个渐变 ，然后分配给每个像素分配生物群落值。</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/voronoi-map-goal-smooth.png" alt="voronoi-map-goal-smooth.png" title="">
+<p>If the game doesn’t need an entire polygon to be the same biome, this approach can be useful for making more interesting boundaries.<br>如果游戏不需要整个多边形都是相同的生物群落，那这种方法可用于制造更有趣的边界。</p>
+<h2 id="Distorted_biome_transitions_扭曲生物群落的过度">Distorted biome transitions 扭曲生物群落的过度</h2><p>Another way to make the map look less polygon-like is to distort the elevation and moisture maps:<br>还有一种使地图看起来不像多边形的方式就是扭曲海拔和湿度图。</p>
+<ol>
+<li>Add Perlin or random noise to the elevation and moisture at each pixel.</li>
+<li>Sample nearby points using Perlin or random noise to change the coordinate.</li>
+<li>添加Perlin或随机噪声函数到海拔和湿度图的每个像素。</li>
+<li>使用培林或随机噪声函数在坐标附近采样</li>
+</ol>
+<p>Here’s an example of what this can do:<br>下面这个示例展示了可以做到什么效果：</p>
+<img src="/2015/06/11/为游戏生成多边形地图-2-3/voronoi-map-goal-distorted.png" alt="voronoi-map-goal-distorted.png" title="">
+<p>Adding noise to the elevation and moisture will produce “dithering” in the zones near transitions. Sampling nearby points using noise will distort the shapes of the boundaries.<br>将噪声添加到海拔和湿度图会导致在区域过度附近产生“抖动”。使用噪声在坐标附近采样会扭曲形状的边缘。</p>
 
       
     </div>
@@ -204,7 +355,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Shader/"> #Shader </a>
+            <a href="/tags/Unity3D/"> #Unity3D </a>
+          
+            <a href="/tags/地图/"> #地图 </a>
+          
+            <a href="/tags/随机/"> #随机 </a>
           
         </div>
       
@@ -213,13 +368,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/">Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/">在Unity3D里用Shader实现遮挡X光效果，类似火炬之光</a>
+              <a href="/2015/06/01/为游戏生成多边形地图-1-3/">（原创）为Unity3D游戏生成2D和3D多边形随机地图(1/3)</a>
             
           </div>
         </div>
@@ -235,8 +388,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2015/05/23/Unity Shaders and Effects Cookbook 翻译 《目录》/"
-               data-title="Unity Shaders and Effects Cookbook《目录》" data-url="http://ivanz.info/2015/05/23/Unity Shaders and Effects Cookbook 翻译 《目录》/">
+          <div class="ds-thread" data-thread-key="2015/06/11/为游戏生成多边形地图-2-3/"
+               data-title="（原创）为Unity3D游戏生成2D和3D多边形随机地图(2/3)" data-url="http://ivanz.info/2015/06/11/为游戏生成多边形地图-2-3/">
           </div>
         
       </div>
@@ -337,7 +490,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Preface  1引言 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1: Diffuse Shading  7第一章：漫反射着色器 7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Chapter 2: Using Textures for Effects  29第二章：使用纹理 29</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Chapter 3: Making Your Game Shine with Specular  59第三章：让你的游戏像镜子那样发光  59</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">Chapter 4:Reflecting Your World 87第四章：反射你的世界 87</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">Chapter 5:Lighting Models 113第五章：光照模型 113</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">Chapter 6: Transparency 143第六章：透明 143</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">Chapter 7:Vertex Magic 159第七章：顶点魔法 159</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">Chapter 8: Mobile Shader Adjustment 173第八章：手机着色器调整 173</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">Chapter 9: Making Your Shader World Modular with Cglncludes 191第九章：用Cglncludes 让你的着色器世界开发变得更加模块化 191</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">11.</span> <span class="nav-text">Chapter 10:Screen Effects with Unity Render Textures 203第十章：用Unity渲染纹理实现屏幕效果 203</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">12.</span> <span class="nav-text">Chapter 11: Gameplay and Screen Effects 229第十一章：游戏性和屏幕效果 229</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">13.</span> <span class="nav-text">Index 249索引249</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Rivers_河流"><span class="nav-number">1.</span> <span class="nav-text">Rivers 河流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Moisture_湿度图"><span class="nav-number">2.</span> <span class="nav-text">Moisture 湿度图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Biomes_生物群落"><span class="nav-number">3.</span> <span class="nav-text">Biomes 生物群落</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Noisy_Edges_噪声化边缘"><span class="nav-number">4.</span> <span class="nav-text">Noisy Edges 噪声化边缘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More_noise_更多的噪声"><span class="nav-number">5.</span> <span class="nav-text">More noise 更多的噪声</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Smooth_biome_transitions_平滑生物群落的过度"><span class="nav-number">6.</span> <span class="nav-text">Smooth biome transitions 平滑生物群落的过度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distorted_biome_transitions_扭曲生物群落的过度"><span class="nav-number">7.</span> <span class="nav-text">Distorted biome transitions 扭曲生物群落的过度</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

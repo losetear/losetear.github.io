@@ -43,7 +43,7 @@
   </script>
 
 
-  <title> 为Unity3D游戏生成2D和3D多边形随机地图(1/3) // Ivan.Z </title>
+  <title> （原创）为Unity3D游戏生成2D和3D多边形随机地图(1/3) // Ivan.Z </title>
 </head>
 
 <body>
@@ -72,7 +72,7 @@
       <li class="menu-item menu-item-home">
         <a href="/">
           <i class="menu-item-icon icon-home"></i> <br />
-          首頁
+          首页
         </a>
       </li>
     
@@ -80,7 +80,7 @@
       <li class="menu-item menu-item-categories">
         <a href="/categories">
           <i class="menu-item-icon icon-categories"></i> <br />
-          分類
+          分类
         </a>
       </li>
     
@@ -88,7 +88,7 @@
       <li class="menu-item menu-item-about">
         <a href="/about">
           <i class="menu-item-icon icon-about"></i> <br />
-          關於
+          关于
         </a>
       </li>
     
@@ -96,7 +96,7 @@
       <li class="menu-item menu-item-archives">
         <a href="/archives">
           <i class="menu-item-icon icon-archives"></i> <br />
-          歸檔
+          归档
         </a>
       </li>
     
@@ -104,7 +104,7 @@
       <li class="menu-item menu-item-tags">
         <a href="/tags">
           <i class="menu-item-icon icon-tags"></i> <br />
-          標籤
+          标签
         </a>
       </li>
     
@@ -139,7 +139,7 @@
           
           
             
-              为Unity3D游戏生成2D和3D多边形随机地图(1/3)
+              （原创）为Unity3D游戏生成2D和3D多边形随机地图(1/3)
             
           
         </h1>
@@ -147,12 +147,12 @@
 
       <div class="post-meta">
         <span class="post-time">
-          發表於 2015-06-01
+          发表于 2015-06-01
         </span>
 
         
           <span class="post-category">
-            &nbsp; | &nbsp; 分類於
+            &nbsp; | &nbsp; 分类于
             
               <a href="/categories/翻译/">翻译</a>
 
@@ -183,7 +183,7 @@
 
       
         <blockquote><p>这是一篇关于如何生成自定义随机地图的文章，可以生成2D或者3D数据，包含山峰、湖泊、河流、草地等，相对于噪声算法生成的随机地图，这篇文章提供的思路拥有更多的控制权，可以针对你的游戏策划案来做相应的调整。由于工作繁忙，所以将这片翻译拆成三部分来发，敬请谅解。后面会提供对应的u3d工程直接使用。<br>因能力有限，翻译不到位的地方请多多原谅。</p>
-<footer><strong>Ivan.Z</strong></footer></blockquote>
+<footer><strong>Ivan.Z</strong><cite><a href="http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/demo.html" target="_blank" rel="external">官方Demo</a></cite></footer></blockquote>
 <h1 id="为游戏生成多边形地图">为游戏生成多边形地图</h1><p>4 Sep 2010<br>I wanted to generate interesting game maps that weren’t constrained to be realistic, and I wanted to try some techniques I hadn’t tried before. I usually make tile maps but instead used a different structure. What could I do with 1,000 polygons instead of 1,000,000 tiles? The distinct player-recognizable areas might be useful for gameplay: locations of towns, places to quest, territory to conquer or settle, landmarks, pathfinding waypoints, difficulty zones, etc. I generated maps with polygons, then rasterized them into tile maps that looked like this:<br>2010年9月4日<br>我想生成一些有趣的不被现实所束缚的游戏地图，并且想尝试一些新技术。我通常用不同的结构来创建tile map。我怎样才能只使用1000个多边形而不是1百万个tile？对于不同的玩家来说，可识别的游戏区域对可玩性更有帮助：城镇地区，任务地点，可征服或定居的领地，地标，寻路坐标，难度标示区域等。我生成了多边形地图，然后栅格化成tile map，参考下图：<br><img src="/2015/06/01/为游戏生成多边形地图-1-3/voronoi-map-goal-16000-shaded.png" alt="voronoi-map-goal-16000-shaded.png" title=""></p>
 <p>Most procedural map generators, including some of my own previous projects, use noise functions (midpoint displacement, fractal, diamond-square, perlin noise, etc.) to generate a height map. I did not do that here. Instead, I used a graph structure to model the things directed by gameplay constraints (elevation, roads, river flow, quest locations, monster types) and noise functions to model the variety not constrained by gameplay (coastline shape, river placement, tree placement).<br>大多数程序生成的地图，包括一些我以前的项目，都是使用噪声函数（midpoint displacement, fractal, diamond-square, perlin noise等）来生成一张高度图。在这里我并没有这样做。相反，我用图结构来建模一些被游戏玩法所限制的东西（海拔，道路，河流，任务地点，怪物种类）并用噪声函数将一些不被游戏所限制（比如海岸线形状，河流的位置，树的位置）的变量建模。</p>
 <p>There were three main things I wanted for this project: good coastlines, mountains, and rivers. For the coastline, I wanted to make island maps that are surrounded by ocean, so that I don’t have to deal with people walking to the edge of the map. For the mountains, I started with something simple: mountains are whatever’s farthest from the coastline, so that you can always walk uphill to reach the top. For the rivers, I started with something simple: draw rivers from the coast to the mountains, so that you can always follow rivers down to the beach.<br>我为这个项目定了三个主要的目标：良好的海岸线，山脉，以及河流。对于海岸线，我想创建一个被海洋包围的岛屿地图，这样我就不用处理人物走到地图边缘的情况了。对于山峰，我开始用一些简单的处理：山不管什么情况下都是离海岸线最远的，这样你就可以永远沿着上坡到达顶峰。对于河流，同样简单处理：河流源于海岸终于山峰，这样你就可以始终遵循河流到海滩。</p>
@@ -303,6 +303,8 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2015/06/11/为游戏生成多边形地图-2-3/">（原创）为Unity3D游戏生成2D和3D多边形随机地图(2/3)</a>
+            
           </div>
 
           <div class="post-nav-next post-nav-item">
@@ -324,7 +326,7 @@
       <div class="comments" id="comments">
         
           <div class="ds-thread" data-thread-key="2015/06/01/为游戏生成多边形地图-1-3/"
-               data-title="为Unity3D游戏生成2D和3D多边形随机地图(1/3)" data-url="http://ivanz.info/2015/06/01/为游戏生成多边形地图-1-3/">
+               data-title="（原创）为Unity3D游戏生成2D和3D多边形随机地图(1/3)" data-url="http://ivanz.info/2015/06/01/为游戏生成多边形地图-1-3/">
           </div>
         
       </div>
@@ -354,10 +356,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目錄
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            本站概覽
+            站点概览
           </li>
         </ul>
       
@@ -371,22 +373,22 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
-              <span class="site-state-item-name">文章</span>
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">分類</span>
+              <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">5</span>
-              <span class="site-state-item-name">標籤</span>
+              <span class="site-state-item-name">标签</span>
               </a>
           </div>
 
@@ -451,11 +453,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  主題 -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
