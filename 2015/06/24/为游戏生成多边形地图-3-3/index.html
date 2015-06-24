@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next,ivanz" />
+  <meta name="keywords" content="NMap,Unity3D,地图,随机," />
 
 
 
@@ -43,7 +43,7 @@
   </script>
 
 
-  <title> Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》 // Ivan.Z </title>
+  <title> （原创）为Unity3D游戏生成2D和3D多边形随机地图(3/3) // Ivan.Z </title>
 </head>
 
 <body>
@@ -139,7 +139,7 @@
           
           
             
-              Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》
+              （原创）为Unity3D游戏生成2D和3D多边形随机地图(3/3)
             
           
         </h1>
@@ -147,14 +147,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          發表於 2015-05-23
+          發表於 2015-06-24
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分類於
             
-              <a href="/categories/Unity3D/">Unity3D</a>
+              <a href="/categories/翻译/">翻译</a>
 
               
               
@@ -167,8 +167,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/"></span>
+            <a href="/2015/06/24/为游戏生成多边形地图-3-3/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/24/为游戏生成多边形地图-3-3/"></span>
             </a>
           </span>
           
@@ -182,34 +182,46 @@
       
 
       
-        <h1>如何在Unity 3D中优化使用大量SkinedMeshRenderer</h1>
-
-<p>Unity3D的核心优化要点就是Combine! 意思就是合并，模型和材质以及贴图最好都要合并。因为一个独立的模型和材质，渲染会占用一次Draw Call，而Draw Call的多少，是现代显卡的瓶颈所在，在手机上尤甚！</p>
-<p>比如你有一个怪物，自身的模型和盔甲以及武器分别是独立的模型和贴图，单独渲染这个怪物，就会占用你3个Draw Call。如果你本身的场景就已经占用了大量的Draw Call，还要刷十几个怪物的话，我相信你的游戏在低端手机上是无法跑的流畅的。关于场景制作的优化方式，我会在之后的文章里和大家分享，这里只讨论带骨骼动画的模型如何优化显示。</p>
-<p>Unity自身已经替我们做了大量的优化工作，如果你的模型是不带骨骼并且顶点数在300一下，那么重复出现的这个模型是会被自动优化从而只占用一个DrawCall，如下图：<br><img src="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/1-300x193.png" alt="1-300x193.png" title=""></p>
-<p>但是如果你需要让这个模型带骨骼并动起来，不好意思，Unity不支持将之优化到一个DrawCall。在下图我们可以看到同时渲染了5个骷髅怪，每个占用3个DrawCall，一共消耗了15个DrawCall：<br><img src="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/2-300x245.png" alt="2-300x245.png" title=""></p>
-<p>当然，你可以将这个骷髅怪的模型装备武器合并到一起，纹理也合并掉，公用一个材质，这样五个怪物就只占用5个DrawCall。如果你不需要同时刷新成百上千个怪物的话，这样就够用了。不过有时候我们会希望同时刷更多的怪物出来，可以让玩家感受场面的宏伟，并且打的更爽快。这个时候怎么办呢？</p>
-<p>这篇文章介绍的是使用插件优化的方式，插件名称叫做MeshBaker2，下载地址就不提供了，各位可以自行搜索。这是一个非常强大的插件，支持MeshRender和SkinedMeshRender的合并，还支持运行时动态合并，在这里我们使用的就是动态合并的方式，下图可以看到在合并前渲染25个矮人共消耗136个DrawCall：<br><img src="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/3-300x165.png" alt="3-300x165.png" title=""></p>
-<p>然后在开启MeshBaker的动态合并之后，我们可以很直接发现DrawCall变成了3个，其中地面和UI各占用一个DrawCall，而我们的25个怪物则已经合并到了一个DrawCall渲染。<br><img src="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/4-300x172.png" alt="4-300x172.png" title=""></p>
-<p>其中核心代码如下：<br>//newCombines指这次调用新增加的Render对象，oldCombines指已经不用需要删除的Render对象<br><figure class="highlight c"><figcaption><span>#</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mb.AddDeleteGameObjects (newCombines.ToArray (), oldCombines.ToArray ());</span><br><span class="line">mb.Apply ();</span><br><span class="line">mb.EnableDisableSourceObjectRenderers (<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure><br>源代码就不放出了，因为里面的插件涉及到版权问题。只要查看Mesh Baker的官方文档就可以很容易使用了。<br>下面是demo演示地址：<a href="https://db.tt/8C924w6A" target="_blank" rel="external">https://db.tt/8C924w6A</a></p>
-
+        <h2 id="NMap的诞生">NMap的诞生</h2><p>博主fork了一个开源的unity实现版本，发现这是个未完工的项目，只是实现了基础的架构。<br>于是准备在这个基础上打造一个更全面的地图生成插件nmap，免费共享出来。希望最终打造成一个可以按照用户的需求完全随机生成2D或者3D地图。<br>由于工作繁忙，现在只是在原来的基础上添加了一个tutorial场景，添加了对应文章章节的代码渲染输出。方便大家对照学习这篇文章。</p>
+<p>nmap的github地址是：<a href="https://github.com/losetear/nmap" target="_blank" rel="external">https://github.com/losetear/nmap</a></p>
+<p>webgl版本：TODO</p>
+<p>下面贴一组对照章节的示意图，大家可以查看一个完整的地图是如何生成的。</p>
+<h3 id="生成多边形">生成多边形</h3><img src="/2015/06/24/为游戏生成多边形地图-3-3/1.png" alt="1.png" title="">
+<h3 id="均匀分布">均匀分布</h3><img src="/2015/06/24/为游戏生成多边形地图-3-3/2.png" alt="2.png" title="">
+<h3 id="双图形显示">双图形显示</h3><img src="/2015/06/24/为游戏生成多边形地图-3-3/3.png" alt="3.png" title="">
+<h3 id="识别陆地">识别陆地</h3><img src="/2015/06/24/为游戏生成多边形地图-3-3/4.png" alt="4.png" title="">
+<h3 id="渲染海拔图">渲染海拔图</h3><img src="/2015/06/24/为游戏生成多边形地图-3-3/5.png" alt="5.png" title="">
+<h3 id="生成河流">生成河流</h3><img src="/2015/06/24/为游戏生成多边形地图-3-3/6.png" alt="6.png" title="">
+<h3 id="显示湿度图">显示湿度图</h3><img src="/2015/06/24/为游戏生成多边形地图-3-3/7.png" alt="7.png" title="">
+<h3 id="显示生物圈">显示生物圈</h3><img src="/2015/06/24/为游戏生成多边形地图-3-3/8.png" alt="8.png" title="">
+<h3 id="显示最终效果图">显示最终效果图</h3><img src="/2015/06/24/为游戏生成多边形地图-3-3/9.png" alt="9.png" title="">
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NMap/"> #NMap </a>
+          
+            <a href="/tags/Unity3D/"> #Unity3D </a>
+          
+            <a href="/tags/地图/"> #地图 </a>
+          
+            <a href="/tags/随机/"> #随机 </a>
+          
+        </div>
       
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/05/23/Unity_Shaders_and_Effects_Cookbook翻译_第一章/">Unity Shaders and Effects Cookbook 翻译 第一章 Diffuse Shading</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/05/23/Unity Shaders and Effects Cookbook 翻译 《目录》/">Unity Shaders and Effects Cookbook《目录》</a>
+              <a href="/2015/06/11/为游戏生成多边形地图-2-3/">（原创）为Unity3D游戏生成2D和3D多边形随机地图(2/3)</a>
             
           </div>
         </div>
@@ -225,8 +237,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/"
-               data-title="Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》" data-url="http://ivanz.info/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/">
+          <div class="ds-thread" data-thread-key="2015/06/24/为游戏生成多边形地图-3-3/"
+               data-title="（原创）为Unity3D游戏生成2D和3D多边形随机地图(3/3)" data-url="http://ivanz.info/2015/06/24/为游戏生成多边形地图-3-3/">
           </div>
         
       </div>
@@ -327,7 +339,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">如何在Unity 3D中优化使用大量SkinedMeshRenderer</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NMap的诞生"><span class="nav-number">1.</span> <span class="nav-text">NMap的诞生</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成多边形"><span class="nav-number">1.1.</span> <span class="nav-text">生成多边形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#均匀分布"><span class="nav-number">1.2.</span> <span class="nav-text">均匀分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双图形显示"><span class="nav-number">1.3.</span> <span class="nav-text">双图形显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#识别陆地"><span class="nav-number">1.4.</span> <span class="nav-text">识别陆地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染海拔图"><span class="nav-number">1.5.</span> <span class="nav-text">渲染海拔图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成河流"><span class="nav-number">1.6.</span> <span class="nav-text">生成河流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示湿度图"><span class="nav-number">1.7.</span> <span class="nav-text">显示湿度图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示生物圈"><span class="nav-number">1.8.</span> <span class="nav-text">显示生物圈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示最终效果图"><span class="nav-number">1.9.</span> <span class="nav-text">显示最终效果图</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
