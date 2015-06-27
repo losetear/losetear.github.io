@@ -141,6 +141,215 @@
           
           
             
+              <a class="post-title-link" href="/2015/06/27/根据名字创造地图/">
+                根据名字创造地图
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2015-06-27
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/NMap/">NMap</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/06/27/根据名字创造地图/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/27/根据名字创造地图/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="根据你的名字生成一张随机地图">根据你的名字生成一张随机地图</h2><pre><code>
+<script type="text/javascript" src="https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js"></script>
+        <script type="text/javascript">
+        <!--
+        var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+        if (document.location.protocol == 'https:')
+            unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+        document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+        -->
+        </script>
+        <script type="text/javascript">
+        <!--
+            var config = {
+                width: 650, 
+                height: 500,
+                params: { enableDebugging:"0" }
+
+            };
+            config.params["disableContextMenu"] = true;
+            var u = new UnityObject2(config);
+
+            jQuery(function() {
+
+                var $missingScreen = jQuery("#unityPlayer").find(".missing");
+                var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+                $missingScreen.hide();
+                $brokenScreen.hide();
+
+                u.observeProgress(function (progress) {
+                    switch(progress.pluginStatus) {
+                        case "broken":
+                            $brokenScreen.find("a").click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                u.installPlugin();
+                                return false;
+                            });
+                            $brokenScreen.show();
+                        break;
+                        case "missing":
+                            $missingScreen.find("a").click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                u.installPlugin();
+                                return false;
+                            });
+                            $missingScreen.show();
+                        break;
+                        case "installed":
+                            $missingScreen.remove();
+                        break;
+                        case "first":
+                        break;
+                    }
+                });
+                u.initPlugin(jQuery("#unityPlayer")[0], "/2015/06/27/根据名字创造地图/webplayer.unity3d");
+            });
+        -->
+        </script>
+        <style type="text/css">
+        <!--
+        body {
+            font-family: Helvetica, Verdana, Arial, sans-serif;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+        a:link, a:visited {
+            color: #000;
+        }
+        a:active, a:hover {
+            color: #666;
+        }
+        p.header {
+            font-size: small;
+        }
+        p.header span {
+            font-weight: bold;
+        }
+        p.footer {
+            font-size: x-small;
+        }
+        div.content {
+            margin: auto;
+            width: 650px;
+        }
+        div.broken,
+        div.missing {
+            margin: auto;
+            position: relative;
+            top: 50%;
+            width: 193px;
+        }
+        div.broken a,
+        div.missing a {
+            height: 63px;
+            position: relative;
+            top: -31px;
+        }
+        div.broken img,
+        div.missing img {
+            border-width: 0px;
+        }
+        div.broken {
+            display: none;
+        }
+        div#unityPlayer {
+            cursor: default;
+            height: 500px;
+            width: 650px;
+        }
+        -->
+        </style>
+<div class="content">
+    <div id="unityPlayer">
+        <div class="missing">
+            <a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!" target="_blank" rel="external">
+                <img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63">
+            </a>
+        </div>
+    </div>
+</div>
+
+</code></pre>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NMap/"> #NMap </a>
+          
+            <a href="/tags/Unity3D/"> #Unity3D </a>
+          
+            <a href="/tags/地图/"> #地图 </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/06/24/为游戏生成多边形地图-3-3/">
                 （原创）为Unity3D游戏生成2D和3D多边形随机地图(3/3)
               </a>
@@ -1259,14 +1468,14 @@ The following screenshot demonstrates the result of our basic diffuse Shader:<br
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>

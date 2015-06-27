@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="Shader," />
+  <meta name="keywords" content="NMap,Unity3D,地图," />
 
 
 
@@ -43,7 +43,7 @@
   </script>
 
 
-  <title> Unity Shaders and Effects Cookbook《目录》 // Ivan.Z </title>
+  <title> 根据名字创造地图 // Ivan.Z </title>
 </head>
 
 <body>
@@ -139,7 +139,7 @@
           
           
             
-              Unity Shaders and Effects Cookbook《目录》
+              根据名字创造地图
             
           
         </h1>
@@ -147,14 +147,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          發表於 2015-05-22
+          發表於 2015-06-27
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分類於
             
-              <a href="/categories/翻译/">翻译</a>
+              <a href="/categories/NMap/">NMap</a>
 
               
               
@@ -167,8 +167,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/05/23/Unity Shaders and Effects Cookbook 翻译 《目录》/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/23/Unity Shaders and Effects Cookbook 翻译 《目录》/"></span>
+            <a href="/2015/06/27/根据名字创造地图/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/27/根据名字创造地图/"></span>
             </a>
           </span>
           
@@ -182,21 +182,130 @@
       
 
       
-        <h1>Preface  1<br>引言 1</h1>
+        <h2 id="根据你的名字生成一张随机地图">根据你的名字生成一张随机地图</h2><pre><code>
+<script type="text/javascript" src="https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js"></script>
+        <script type="text/javascript">
+        <!--
+        var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+        if (document.location.protocol == 'https:')
+            unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+        document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+        -->
+        </script>
+        <script type="text/javascript">
+        <!--
+            var config = {
+                width: 650, 
+                height: 500,
+                params: { enableDebugging:"0" }
 
-<p></p><h1>Chapter 1: Diffuse Shading  7<br>第一章：漫反射着色器 7</h1><br>Introduction  7<br>介绍 7<br>Creating a basic Surface Shader  8<br>创建一个基础的表面着色器 8<br>Adding properties to a Surface Shader  12<br>添加属性到表面着色器<br>Using properties in a Surface Shader  14<br>在表面着色器中使用属性<br>Creating a custom diffuse lighting model  17<br>创建一个自定义的漫反射光照模型<br>Creating a Half Lambert lighting model  20<br>创建一个Half Lambert[a] 光照模型<br>Creating a ramp texture to control diffuse shading  22<br>使用ramp texture来控制漫反射着色器<br>Creating a faked BRDF using a 2D ramp texture  24<br>通过 2D ramp texture来模拟BRDF[b] <p></p>
-<p></p><h1>Chapter 2: Using Textures for Effects  29<br>第二章：使用纹理 29</h1><br>Introduction  29<br>介绍 29<br>Scrolling textures by modifying UV values  30<br>修改UV来滚动纹理 30<br>Animating sprite sheets  33<br>让sprite sheets 运动起来 33<br>Packing and blending textures  39<br>打包和混合纹理 39<br>Normal mapping  44<br>法线贴图 44<br>Creating procedural textures in the Unity editor  48<br>在Unity编辑器里创建procedural textures 48<br>Photoshop levels effect  54<br>实现Photoshop 的效果 54<p></p>
-<p></p><h1>Chapter 3: Making Your Game Shine with Specular  59<br>第三章：让你的游戏像镜子那样发光  59</h1><br>Introduction  59<br>介绍 59<br>Utilizing Unity3D’s built-in Specular type  60<br>使用Unity3D自带的镜面反射Shader 60<br>Creating a Phong Specular type  62<br>创建Phong镜面反射类型 62<br>Creating a BlinnPhong Specular type  66<br>创建BlinnPhong镜面反射类型 66<br>Masking Specular with textures  69<br>用纹理来遮罩镜面反射 69<br>Metallic versus soft Specular  74<br>金属类型的镜面反射 74<br>Creating an Anisotropic Specular type  79<br>创建一个各向异性镜面反射类型 79<p></p>
-<p></p><h1>Chapter 4:Reflecting Your World 87<br>第四章：反射你的世界 87</h1><br>Creating cubemaps in Unity3D 88<br>在Unity3D里创建一个立方贴图 88<br>Simple Cubemap reflection in Unity3D 93<br>简单的立方贴图反射 93<br>Masking reflections in Unity3D 96<br>Unity3D里的遮罩反射96<br>Normal maps and reflections in Unity3D 100<br>Unity3D 里的法线贴图和反射 100<br>Fresnel reflections in Unity3D 104<br>Unity3D 里的菲涅耳反射[c]<br>Creating a simple dynamic Cubemap system 108<br>创建一个简单的动态立方贴图 108<p></p>
-<p></p><h1>Chapter 5:Lighting Models 113<br>第五章：光照模型 113</h1><br>introduction 113<br>介绍 113<br>The Lit sphere lighting model 114<br>被照亮的球体光照模型 114<br>The diffuse convolution lighting model 119<br>漫发射叠加光照模型 119<br>Creating a vehicle paint lighting model 125<br>创建交通工具的绘制光照模型 125<br>Skin shader 130<br>皮肤着色器 130<br>Cloth shading 137<br>布料着色器 137<p></p>
-<p></p><h1>Chapter 6: Transparency 143<br>第六章：透明 143</h1><br>introduction 143<br>介绍 143<br>Creating transparency with alpha 143<br>用alpha控制透明度 143<br>Transparent cutoff shader 146<br>透明裁剪着色器 146<br>Depth sorting with render queues 148<br>用渲染对列控制深度排序 148<br>GUI and transparency 151<br>用在Gui上的透明 151<p></p>
-<p></p><h1>Chapter 7:Vertex Magic 159<br>第七章：顶点魔法 159</h1><br>introduction 159<br>介绍 159<br>Accessing a vertex color in a Surface Shader 160<br>在表面着色器里访问顶点颜色 160<br>Animating vertices in a Surface Shader 164<br>在表面着色器里运动顶点 164<br>Using vertex color for terrains 168<br>在地形上使用顶点色 168<p></p>
-<p></p><h1>Chapter 8: Mobile Shader Adjustment 173<br>第八章：手机着色器调整 173</h1><br>introduction 173<br>介绍 173<br>What is a cheap Shader? 174<br>什么是快速的着色器 174<br>Profiling your Shaders 179<br>分析你的着色器 179<br>Modiflying your shaders for mobile 185<br>为了手机修改你的着色器 185<p></p>
-<p></p><h1>Chapter 9: Making Your Shader World Modular with Cglncludes 191<br>第九章：用Cglncludes 让你的着色器世界开发变得更加模块化 191</h1><br>introduction 191<br>介绍 191<br>Cginclude files that are built into Unity 192<br>Unity自带的Cginclude文件 192<br>Creating a cginclude file to store lighting models 195<br>创建一个cginclude文件来保存光照模型 195<br>Building shaders with #define directives 199<br>用#define 指令来建立着色器 199<p></p>
-<p></p><h1>Chapter 10:Screen Effects with Unity Render Textures 203<br>第十章：用Unity渲染纹理实现屏幕效果 203</h1><br>Introduction 203<br>介绍 203<br>Setting up the screen effects script system 204<br>设置屏幕效果的脚本系统 204<br>Brightness, saturation, and contrast with screen effects 213<br>用屏幕效果调整亮度、饱和度以及对比度 213<br>Basic Photoshop-like blend modes with screen effects 218<br>像Photoshop那样混合模型和屏幕效果 218<br>The Overlay blend mode with screen effects 224<br>在模型上覆盖屏幕效果 224<p></p>
-<p></p><h1>Chapter 11: Gameplay and Screen Effects 229<br>第十一章：游戏性和屏幕效果 229</h1><br>Introduction 229<br>介绍 229<br>Creating an old movie screen effect 230<br>创建一个旧电影屏幕效果 230<br>Creating a night vision screen effect 239<br>创建一个夜视仪效果 239<p></p>
-<p></p><h1>Index 249<br>索引249</h1><br>[a]Ivan Zhang:<br>这个算法会加强暗部的亮度<br>[b]Ivan Zhang:<br>BRDF 双向反射分布函数 参见wiki <a href="http://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function" target="_blank" rel="external">http://en.wikipedia.org/wiki/Bidirectional_reflectance_distribution_function</a><br>[c]Ivan Zhang:<br>参见 Wiki <a href="http://zh.wikipedia.org/wiki/%E8%8F%B2%E6%B6%85%E8%80%B3%E6%96%B9%E7%A8%8B" target="_blank" rel="external">http://zh.wikipedia.org/wiki/%E8%8F%B2%E6%B6%85%E8%80%B3%E6%96%B9%E7%A8%8B</a><br>[d]Ivan Zhang:<br>表面着色器<p></p>
+            };
+            config.params["disableContextMenu"] = true;
+            var u = new UnityObject2(config);
 
+            jQuery(function() {
+
+                var $missingScreen = jQuery("#unityPlayer").find(".missing");
+                var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+                $missingScreen.hide();
+                $brokenScreen.hide();
+
+                u.observeProgress(function (progress) {
+                    switch(progress.pluginStatus) {
+                        case "broken":
+                            $brokenScreen.find("a").click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                u.installPlugin();
+                                return false;
+                            });
+                            $brokenScreen.show();
+                        break;
+                        case "missing":
+                            $missingScreen.find("a").click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                u.installPlugin();
+                                return false;
+                            });
+                            $missingScreen.show();
+                        break;
+                        case "installed":
+                            $missingScreen.remove();
+                        break;
+                        case "first":
+                        break;
+                    }
+                });
+                u.initPlugin(jQuery("#unityPlayer")[0], "/2015/06/27/根据名字创造地图/webplayer.unity3d");
+            });
+        -->
+        </script>
+        <style type="text/css">
+        <!--
+        body {
+            font-family: Helvetica, Verdana, Arial, sans-serif;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+        a:link, a:visited {
+            color: #000;
+        }
+        a:active, a:hover {
+            color: #666;
+        }
+        p.header {
+            font-size: small;
+        }
+        p.header span {
+            font-weight: bold;
+        }
+        p.footer {
+            font-size: x-small;
+        }
+        div.content {
+            margin: auto;
+            width: 650px;
+        }
+        div.broken,
+        div.missing {
+            margin: auto;
+            position: relative;
+            top: 50%;
+            width: 193px;
+        }
+        div.broken a,
+        div.missing a {
+            height: 63px;
+            position: relative;
+            top: -31px;
+        }
+        div.broken img,
+        div.missing img {
+            border-width: 0px;
+        }
+        div.broken {
+            display: none;
+        }
+        div#unityPlayer {
+            cursor: default;
+            height: 500px;
+            width: 650px;
+        }
+        -->
+        </style>
+<div class="content">
+    <div id="unityPlayer">
+        <div class="missing">
+            <a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!" target="_blank" rel="external">
+                <img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63">
+            </a>
+        </div>
+    </div>
+</div>
+
+</code></pre>
       
     </div>
 
@@ -204,7 +313,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Shader/"> #Shader </a>
+            <a href="/tags/NMap/"> #NMap </a>
+          
+            <a href="/tags/Unity3D/"> #Unity3D </a>
+          
+            <a href="/tags/地图/"> #地图 </a>
           
         </div>
       
@@ -213,13 +326,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/05/23/Unity3D优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》/">Unity3D 优化系列纹章之《如何在手机场景中渲染成百上千个怪物而不卡》</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/05/20/在Unity3D里用Shader实现遮挡X光效果，类似火炬之光/">在Unity3D里用Shader实现遮挡X光效果，类似火炬之光</a>
+              <a href="/2015/06/24/为游戏生成多边形地图-3-3/">（原创）为Unity3D游戏生成2D和3D多边形随机地图(3/3)</a>
             
           </div>
         </div>
@@ -235,8 +346,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2015/05/23/Unity Shaders and Effects Cookbook 翻译 《目录》/"
-               data-title="Unity Shaders and Effects Cookbook《目录》" data-url="http://ivanz.info/2015/05/23/Unity Shaders and Effects Cookbook 翻译 《目录》/">
+          <div class="ds-thread" data-thread-key="2015/06/27/根据名字创造地图/"
+               data-title="根据名字创造地图" data-url="http://ivanz.info/2015/06/27/根据名字创造地图/">
           </div>
         
       </div>
@@ -337,7 +448,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Preface  1引言 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1: Diffuse Shading  7第一章：漫反射着色器 7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Chapter 2: Using Textures for Effects  29第二章：使用纹理 29</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Chapter 3: Making Your Game Shine with Specular  59第三章：让你的游戏像镜子那样发光  59</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">Chapter 4:Reflecting Your World 87第四章：反射你的世界 87</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">Chapter 5:Lighting Models 113第五章：光照模型 113</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">Chapter 6: Transparency 143第六章：透明 143</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">Chapter 7:Vertex Magic 159第七章：顶点魔法 159</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">Chapter 8: Mobile Shader Adjustment 173第八章：手机着色器调整 173</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">Chapter 9: Making Your Shader World Modular with Cglncludes 191第九章：用Cglncludes 让你的着色器世界开发变得更加模块化 191</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">11.</span> <span class="nav-text">Chapter 10:Screen Effects with Unity Render Textures 203第十章：用Unity渲染纹理实现屏幕效果 203</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">12.</span> <span class="nav-text">Chapter 11: Gameplay and Screen Effects 229第十一章：游戏性和屏幕效果 229</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">13.</span> <span class="nav-text">Index 249索引249</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#根据你的名字生成一张随机地图"><span class="nav-number">1.</span> <span class="nav-text">根据你的名字生成一张随机地图</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
