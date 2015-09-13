@@ -22,7 +22,7 @@
 
 
 
-  <meta name="keywords" content="NMap,Unity3D,地图," />
+  <meta name="keywords" content="AI,GOAP,Unity3D," />
 
 
 
@@ -43,7 +43,7 @@
   </script>
 
 
-  <title> 根据名字创造地图 // Indie Ivan </title>
+  <title> U3D进阶AI算法：GOAP // Indie Ivan </title>
 </head>
 
 <body>
@@ -139,7 +139,7 @@
           
           
             
-              根据名字创造地图
+              U3D进阶AI算法：GOAP
             
           
         </h1>
@@ -147,14 +147,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          發表於 2015-06-27
+          發表於 2015-09-13
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分類於
             
-              <a href="/categories/NMap/">NMap</a>
+              <a href="/categories/AI/">AI</a>
 
               
               
@@ -167,8 +167,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/06/27/根据名字创造地图/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/27/根据名字创造地图/"></span>
+            <a href="/2015/09/13/U3D进阶AI算法：GOAP/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/13/U3D进阶AI算法：GOAP/"></span>
             </a>
           </span>
           
@@ -182,130 +182,27 @@
       
 
       
-        <h2 id="根据你的名字生成一张随机地图">根据你的名字生成一张随机地图</h2><pre><code>
-<script type="text/javascript" src="https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js"></script>
-        <script type="text/javascript">
-        <!--
-        var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
-        if (document.location.protocol == 'https:')
-            unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
-        document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
-        -->
-        </script>
-        <script type="text/javascript">
-        <!--
-            var config = {
-                width: 650, 
-                height: 500,
-                params: { enableDebugging:"0" }
+        <h2 id="在这里先科普下常用的Ai架构：">在这里先科普下常用的Ai架构：</h2><h3 id="状态机">状态机</h3><p>最简单的应该是状态机了，这应该是每个程序员都接触过的架构。简单易懂，优点非常明显，但是同样缺点也不少，首先编码量很大，大部分都是硬编码在里面，可读性和复用性很低。基本上已经在大型游戏里淘汰了。</p>
+<h3 id="行为树">行为树</h3><p>这是这几年最流行的ai架构了，从状态机延伸而来，最大的优点就是行为节点可复用性很高，可以自由的组合出想要的ai行为而不用重新去硬编码整个逻辑。缺点就是还依赖于ai设计师的架构，不够灵活。</p>
+<h3 id="GOAP（Goal_Oriented_Action_Planning）">GOAP（Goal Oriented Action Planning）</h3><p>就是本文的重点。从最早的FEAR到Stalker以及其他单机大作都是用GOAP实现AI。GOAP的优点在于它会根据设定的目标来搜索出所有的组合可能性，然后根据决策算法来找出最优的选项。比如我需要npc去填充肚子，他可能会去摘果子吃或者找把弓箭去打猎填饱肚子，这些都会根据当时的环境来动态决策，显得异常真实。</p>
+<p>本文基于网上一个开源的GOAP实现算法改进而来，<br>源地址在这里：<a href="https://github.com/sploreg/goap。" target="_blank" rel="external">https://github.com/sploreg/goap。</a></p>
+<h2 id="改进后的算法地址：https://github-com/losetear/goap">改进后的算法地址：<a href="https://github.com/losetear/goap" target="_blank" rel="external">https://github.com/losetear/goap</a></h2><p>这里并不想对这个源码进行详细解释，原作者以及分享了一篇很棒的文章，而且网上也有了翻译，地址在这里：<a href="http://gamerboom.com/archives/83622" target="_blank" rel="external">http://gamerboom.com/archives/83622</a> 。<br>这里只是想记录对这个算法进行的一些改进，因为我也是刚接触不久，如有错误敬请指出，谢谢。</p>
+<h2 id="名词解释">名词解释</h2><ol>
+<li>Agent是执行主体，负责调度全局，并执行终端节点。包含三个主要的fsmstate，idleState用于在空闲时决策出下一个可用的行动链。moveToState用于一些需要移动到目标的action，performAction用于执行行动链。</li>
+<li>GoapPlaner将找出可以完成当前目标的行动链，并且使用决策算法找出里面最优的。</li>
+<li>GoapAction代表执行终端，有几个重要的参数：preconditions表示前提，执行这个终端必须通过前提测试。effects表示执行后产生的效果。Cost表示执行这个终端的消耗，Risk和Return组成了风险收益，用于决策整个行动链的优先级。</li>
+</ol>
+<h2 id="算法过程">算法过程</h2><ol>
+<li>Agent执行idleState，找出执行者相关的环境变量和Goal排序表(Brain通过决策算法计算出当前的Goal权重)</li>
+<li>Agent通过优先级遍历Goal</li>
+<li>Planer接受当前可执行的所有Action和Goal，来决策出一个最优的行动链。如果完成不了Goal，返回空值让Agent遍历下一个Goal。</li>
+<li>Agent跳转到PerformAction，执行行动链。</li>
+</ol>
+<h2 id="优化方案">优化方案</h2><ol>
+<li>每次执行Action都会调用FindObjectsOfType，从而降低性能。解决方法：增加BlackBoard类，每个实体保存一份自己的数据，在创建的时候初始化一次即可。</li>
+<li>Planer在生成行动链的时候递归过多从而导致创建了过多的临时变量。解决方法：找出GC瓶颈，将之回收复用，降低GC频率。</li>
+</ol>
 
-            };
-            config.params["disableContextMenu"] = true;
-            var u = new UnityObject2(config);
-
-            jQuery(function() {
-
-                var $missingScreen = jQuery("#unityPlayer").find(".missing");
-                var $brokenScreen = jQuery("#unityPlayer").find(".broken");
-                $missingScreen.hide();
-                $brokenScreen.hide();
-
-                u.observeProgress(function (progress) {
-                    switch(progress.pluginStatus) {
-                        case "broken":
-                            $brokenScreen.find("a").click(function (e) {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                u.installPlugin();
-                                return false;
-                            });
-                            $brokenScreen.show();
-                        break;
-                        case "missing":
-                            $missingScreen.find("a").click(function (e) {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                u.installPlugin();
-                                return false;
-                            });
-                            $missingScreen.show();
-                        break;
-                        case "installed":
-                            $missingScreen.remove();
-                        break;
-                        case "first":
-                        break;
-                    }
-                });
-                u.initPlugin(jQuery("#unityPlayer")[0], "/2015/06/27/根据名字创造地图/webplayer.unity3d");
-            });
-        -->
-        </script>
-        <style type="text/css">
-        <!--
-        body {
-            font-family: Helvetica, Verdana, Arial, sans-serif;
-            background-color: white;
-            color: black;
-            text-align: center;
-        }
-        a:link, a:visited {
-            color: #000;
-        }
-        a:active, a:hover {
-            color: #666;
-        }
-        p.header {
-            font-size: small;
-        }
-        p.header span {
-            font-weight: bold;
-        }
-        p.footer {
-            font-size: x-small;
-        }
-        div.content {
-            margin: auto;
-            width: 650px;
-        }
-        div.broken,
-        div.missing {
-            margin: auto;
-            position: relative;
-            top: 50%;
-            width: 193px;
-        }
-        div.broken a,
-        div.missing a {
-            height: 63px;
-            position: relative;
-            top: -31px;
-        }
-        div.broken img,
-        div.missing img {
-            border-width: 0px;
-        }
-        div.broken {
-            display: none;
-        }
-        div#unityPlayer {
-            cursor: default;
-            height: 500px;
-            width: 650px;
-        }
-        -->
-        </style>
-<div class="content">
-    <div id="unityPlayer">
-        <div class="missing">
-            <a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!" target="_blank" rel="external">
-                <img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63">
-            </a>
-        </div>
-    </div>
-</div>
-
-</code></pre>
       
     </div>
 
@@ -313,11 +210,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NMap/"> #NMap </a>
+            <a href="/tags/AI/"> #AI </a>
+          
+            <a href="/tags/GOAP/"> #GOAP </a>
           
             <a href="/tags/Unity3D/"> #Unity3D </a>
-          
-            <a href="/tags/地图/"> #地图 </a>
           
         </div>
       
@@ -326,13 +223,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/09/13/U3D进阶AI算法：GOAP/">U3D进阶AI算法：GOAP</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/06/24/为游戏生成多边形地图-3-3/">（原创）为Unity3D游戏生成2D和3D多边形随机地图(3/3)</a>
+              <a href="/2015/06/27/根据名字创造地图/">根据名字创造地图</a>
             
           </div>
         </div>
@@ -348,8 +243,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2015/06/27/根据名字创造地图/"
-               data-title="根据名字创造地图" data-url="http://iivan.in/2015/06/27/根据名字创造地图/">
+          <div class="ds-thread" data-thread-key="2015/09/13/U3D进阶AI算法：GOAP/"
+               data-title="U3D进阶AI算法：GOAP" data-url="http://iivan.in/2015/09/13/U3D进阶AI算法：GOAP/">
           </div>
         
       </div>
@@ -450,7 +345,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#根据你的名字生成一张随机地图"><span class="nav-number">1.</span> <span class="nav-text">根据你的名字生成一张随机地图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在这里先科普下常用的Ai架构："><span class="nav-number">1.</span> <span class="nav-text">在这里先科普下常用的Ai架构：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态机"><span class="nav-number">1.1.</span> <span class="nav-text">状态机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行为树"><span class="nav-number">1.2.</span> <span class="nav-text">行为树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GOAP（Goal_Oriented_Action_Planning）"><span class="nav-number">1.3.</span> <span class="nav-text">GOAP（Goal Oriented Action Planning）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改进后的算法地址：https://github-com/losetear/goap"><span class="nav-number">2.</span> <span class="nav-text">改进后的算法地址：https://github.com/losetear/goap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#名词解释"><span class="nav-number">3.</span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法过程"><span class="nav-number">4.</span> <span class="nav-text">算法过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化方案"><span class="nav-number">5.</span> <span class="nav-text">优化方案</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
